@@ -19,6 +19,8 @@ namespace Test
                         {
                             Console.WriteLine("Signature " + args[2] + " was found.");
                         }
+                        else
+                            Console.WriteLine("Signature " + args[2] + " not found.");
                         break;
                     case "-l":
                         ByteReader.ByteReader.PrintBytes(file);

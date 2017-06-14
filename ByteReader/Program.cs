@@ -13,7 +13,7 @@ namespace ByteReader
             if (File.Exists(file))
                 bytes = GetHexFromFile(file);
             else
-                Console.WriteLine("File not found");
+                throw new FileNotFoundException("\"" + file + "\"" + " was not found");
             for (int i = 0; i < bytes.Length; ++i)
                 Console.Write(bytes[i].ToString("X2") + " ");
         }
@@ -26,24 +26,46 @@ namespace ByteReader
         /// <returns></returns>
         public static bool CheckFileSignature(string file, string signature)
         {
-            List<byte> signBytes = new List<byte>(System.Text.Encoding.ASCII.GetBytes(signature));
-            List<byte> fileBytes = new List<byte>(GetHexFromFile(file));
+            if (File.Exists(file))
+            {
+                if (signature == "")
+                    return false;
 
-            // Check whether signBytes is a subset of fileBytes
-            return !signBytes.Except(fileBytes).Any();
+                // List<byte> signBytes = new List<byte>(System.Text.Encoding.ASCII.GetBytes(signature));
+                // List<byte> fileBytes = new List<byte>(GetHexFromFile(file));
+                // Check whether signBytes is a subset of fileBytes
+                // return !signBytes.Except(fileBytes).Any();
+
+                byte[] fileBytes = GetHexFromFile(file);
+                byte[] signBytes = StringToByteArray(signature);
+
+                for (int i = 0; i < signBytes.Length; ++i)
+                {
+                    if (signBytes[i] != fileBytes[i])
+                        return false;
+                }
+                return true;
+            }
+            else
+                throw new FileNotFoundException("\"" + file + "\"" + " was not found");
         }
 
         public static byte[] GetHexFromFile(string file)
         {
-            BinaryReader reader = new BinaryReader(new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.None));
-            reader.BaseStream.Position = 0x0;     // The offset you are reading the data from
-            byte[] data = ReadAllBytes(reader);
-            reader.Close();
-            return data;
+            if (File.Exists(file))
+            {
+                BinaryReader reader = new BinaryReader(new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.None));
+                reader.BaseStream.Position = 0x0;     // The offset you are reading the data from
+                byte[] data = ReadAllBytes(reader);
+                reader.Close();
+                return data;
+            }
+            else
+                throw new FileNotFoundException("\"" + file + "\"" + " was not found");
         }
 
 
-        public static byte[] ReadAllBytes(BinaryReader reader)
+        private static byte[] ReadAllBytes(BinaryReader reader)
         {
             const int bufferSize = 4096;
             using (var ms = new MemoryStream())
@@ -62,6 +84,19 @@ namespace ByteReader
             {
                 fs.Write(byteArray, 0, byteArray.Length);
             }
+        }
+
+        public static string ByteArrayToString(byte[] ba, string separator = " ")
+        {
+            var shb = new System.Runtime.Remoting.Metadata.W3cXsd2001.SoapHexBinary(ba);
+            return System.Text.RegularExpressions.Regex.Replace(shb.ToString(), ".{2}", separator);
+        }
+
+        public static byte[] StringToByteArray(string hex)
+        {
+            var shb = System.Runtime.Remoting.Metadata.W3cXsd2001.SoapHexBinary.Parse(hex);
+            return shb.Value;
+           
         }
     }
 }

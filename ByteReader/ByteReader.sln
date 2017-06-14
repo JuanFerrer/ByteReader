@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteReader", "ByteReader.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "..\Test\Test.csproj", "{FF689939-A307-49A3-A5DC-928453047AF6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteReaderTests", "..\ByteReaderTests\ByteReaderTests.csproj", "{FB37ED39-F384-4DAD-884C-9E0E570D7FB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{FF689939-A307-49A3-A5DC-928453047AF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF689939-A307-49A3-A5DC-928453047AF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF689939-A307-49A3-A5DC-928453047AF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB37ED39-F384-4DAD-884C-9E0E570D7FB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB37ED39-F384-4DAD-884C-9E0E570D7FB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB37ED39-F384-4DAD-884C-9E0E570D7FB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB37ED39-F384-4DAD-884C-9E0E570D7FB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

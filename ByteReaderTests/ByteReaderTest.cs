@@ -31,8 +31,13 @@ namespace ByteReaderTests
         [TestMethod]
         public void PrintBytesWithFile()
         {
-            string file = @"..\..\Test01.jpg";
+            string file = @"..\..\Test03.txt";
             ByteReader.ByteReader.PrintBytes(file);
+            ByteReader.ByteReader.PrintBytes(file, -5);
+            ByteReader.ByteReader.PrintBytes(file, -1);
+            ByteReader.ByteReader.PrintBytes(file, 0);
+            ByteReader.ByteReader.PrintBytes(file, 3);
+            ByteReader.ByteReader.PrintBytes(file, 200);
         }
 
         //////////////////////////////////////////////////////////////////

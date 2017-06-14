@@ -134,5 +134,39 @@ namespace ByteReaderTests
             result = bar.SequenceEqual(bane);
             Assert.AreEqual(false, result, "Comparing different byte arrays");
         }
+
+        [TestMethod]
+        public void ByteArrayToStringTest()
+        {
+            byte[] ba = { 0xFF, 0xA2, 0x2F, 0x00 };
+            string expected = "FF A2 2F 00";
+            string result = ByteReader.ByteReader.ByteArrayToString(ba);
+            Assert.AreEqual(expected, result);
+
+            byte[] bane = { 0xA2, 0x00, 0xFF, 0x2F };
+            result = ByteReader.ByteReader.ByteArrayToString(bane);
+            Assert.AreNotEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void StringToByteArrayTest()
+        {
+            string byteString = "A2 FF 00 2F";
+            byte[] bae = { 0xA2, 0xFF, 0x00, 0x2F };
+            byte[] bar = ByteReader.ByteReader.StringToByteArray(byteString);
+            bool result = bar.SequenceEqual(bae);
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void ByteArrayToFileTest()
+        {
+            string str = "Lorem ipsum";
+            string filename = @"..\..\Test04.txt";
+            byte[] ba = System.Text.Encoding.ASCII.GetBytes(str);
+            ByteReader.ByteReader.ByteArrayToFile(filename, ba);
+            string result = File.ReadLines(filename).First();
+            Assert.AreEqual(str, result);
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace ByteReader
                 bytes = GetHexFromFile(file);
             else
                 throw new FileNotFoundException("\"" + file + "\"" + " was not found");
-            int maxI = amount >= 0 && amount <= bytes.Length? amount : bytes.Length;
+            int maxI = amount >= 0 && amount <= bytes.Length ? amount : bytes.Length;
             for (int i = 0; i < bytes.Length; ++i)
                 Console.Write(bytes[i].ToString("X2") + " ");
         }
@@ -75,22 +75,8 @@ namespace ByteReader
                 throw new FileNotFoundException("\"" + file + "\"" + " was not found");
         }
 
-
-        private static byte[] ReadAllBytes(BinaryReader reader)
-        {
-            const int bufferSize = 4096;
-            using (var ms = new MemoryStream())
-            {
-                byte[] buffer = new byte[bufferSize];
-                int count;
-                while ((count = reader.Read(buffer, 0, buffer.Length)) != 0)
-                    ms.Write(buffer, 0, count);
-                return ms.ToArray();
-            }
-        }
-
         /// <summary>
-        /// 
+        /// Parse byte array into a string
         /// </summary>
         /// <param name="ba"></param>
         /// <param name="separator"></param>
@@ -98,11 +84,11 @@ namespace ByteReader
         public static string ByteArrayToString(byte[] ba, string separator = " ")
         {
             var shb = new System.Runtime.Remoting.Metadata.W3cXsd2001.SoapHexBinary(ba);
-            return System.Text.RegularExpressions.Regex.Replace(shb.ToString(), ".{2}", separator);
+            return System.Text.RegularExpressions.Regex.Replace(shb.ToString(), @"\w{2}(?!$)", "$0" + separator);
         }
 
         /// <summary>
-        /// 
+        /// Parse a string into a byte array
         /// </summary>
         /// <param name="hex"></param>
         /// <returns></returns>
@@ -124,6 +110,34 @@ namespace ByteReader
             {
                 fs.Write(byteArray, 0, byteArray.Length);
             }
+        }
+
+        private static byte[] ReadAllBytes(BinaryReader reader)
+        {
+            const int bufferSize = 4096;
+            using (var ms = new MemoryStream())
+            {
+                byte[] buffer = new byte[bufferSize];
+                int count;
+                while ((count = reader.Read(buffer, 0, buffer.Length)) != 0)
+                    ms.Write(buffer, 0, count);
+                return ms.ToArray();
+            }
+        }
+
+        private static List<string> SplitIntoParts(this string s, int partLength)
+        {
+            var list = new List<string>();
+
+            if (!string.IsNullOrEmpty(s) && partLength > 0)
+            {
+                for (var i = 0; i < s.Length; i += partLength)
+                {
+                    list.Add(s.Substring(i, Math.Min(partLength, s.Length - i)));
+                }
+            }
+
+            return list;
         }
     }
 }

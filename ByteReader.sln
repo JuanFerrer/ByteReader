@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteReader", "ByteReader\ByteReader.csproj", "{EB887066-8347-4FBD-9052-C39273771516}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{FF689939-A307-49A3-A5DC-928453047AF6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteReaderCmd", "Test\ByteReaderCmd.csproj", "{FF689939-A307-49A3-A5DC-928453047AF6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteReaderTests", "ByteReaderTests\ByteReaderTests.csproj", "{FB37ED39-F384-4DAD-884C-9E0E570D7FB8}"
 EndProject

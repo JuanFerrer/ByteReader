@@ -20,7 +20,7 @@ namespace ByteReader
             else
                 throw new FileNotFoundException("\"" + file + "\"" + " was not found");
             int maxI = amount >= 0 && amount <= bytes.Length ? amount : bytes.Length;
-            for (int i = 0; i < bytes.Length; ++i)
+            for (int i = 0; i < maxI; ++i)
                 Console.Write(bytes[i].ToString("X2") + " ");
         }
 

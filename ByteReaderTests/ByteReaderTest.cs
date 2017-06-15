@@ -8,9 +8,7 @@ namespace ByteReaderTests
     [TestClass]
     public class ByteReaderTest
     {
-        //////////////////////////////////////////////////////////////////
-        // PrintBytes
-        //////////////////////////////////////////////////////////////////
+        #region PrintBytes
 
         [TestMethod]
         [ExpectedException(typeof(FileNotFoundException))]
@@ -40,9 +38,9 @@ namespace ByteReaderTests
             ByteReader.ByteReader.PrintBytes(file, 200);
         }
 
-        //////////////////////////////////////////////////////////////////
-        // CheckFileSignature
-        //////////////////////////////////////////////////////////////////
+        #endregion
+
+        #region CheckFileSignature
 
         [TestMethod]
         [ExpectedException(typeof(FileNotFoundException))]
@@ -104,6 +102,10 @@ namespace ByteReaderTests
             bool result = ByteReader.ByteReader.CheckFileSignature(file, signature);
         }
 
+        #endregion
+
+        #region GetHexFromFile
+
         [TestMethod]
         [ExpectedException(typeof(FileNotFoundException))]
         public void GetHexFromFileEmptyFile()
@@ -134,6 +136,10 @@ namespace ByteReaderTests
             result = bar.SequenceEqual(bane);
             Assert.AreEqual(false, result, "Comparing different byte arrays");
         }
+
+        #endregion
+
+        #region ByteArrayToAndFro
 
         [TestMethod]
         public void ByteArrayToStringTest()
@@ -168,5 +174,7 @@ namespace ByteReaderTests
             string result = File.ReadLines(filename).First();
             Assert.AreEqual(str, result);
         }
+
+        #endregion
     }
 }

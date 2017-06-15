@@ -104,42 +104,38 @@ namespace ByteReaderTests
 
         #endregion
 
-        #region GetHexFromFile
+        #region ByteArrayToAndFro
 
         [TestMethod]
         [ExpectedException(typeof(FileNotFoundException))]
-        public void GetHexFromFileEmptyFile()
+        public void FileToByteArrayEmptyFile()
         {
             string file = @"";
-            byte[] baf = ByteReader.ByteReader.GetHexFromFile(file);
+            byte[] baf = ByteReader.ByteReader.FileToByteArray(file);
         }
 
         [TestMethod]
         [ExpectedException(typeof(FileNotFoundException))]
-        public void GetHexFromFileNoFile()
+        public void FileToByteArrayNoFile()
         {
             string file = @"..\..\Test00.null";
-            byte[] baf = ByteReader.ByteReader.GetHexFromFile(file);
+            byte[] baf = ByteReader.ByteReader.FileToByteArray(file);
         }
 
         [TestMethod]
-        public void GetHexFromFile()
+        public void FileToByteArrayFile()
         {
             string file = @"..\..\Test03.txt";
             byte[] bae = ByteReader.ByteReader.StringToByteArray("4C 6F 72 65 6D 20 69 70 73 75 6D");
-            byte[] bar = ByteReader.ByteReader.GetHexFromFile(file);
+            byte[] bar = ByteReader.ByteReader.FileToByteArray(file);
             bool result = bar.SequenceEqual(bae);
             Assert.AreEqual(true, result, "Comparing byte arrays");
 
             byte[] bane = ByteReader.ByteReader.StringToByteArray("FF D8");
-            bar = ByteReader.ByteReader.GetHexFromFile(file);
+            bar = ByteReader.ByteReader.FileToByteArray(file);
             result = bar.SequenceEqual(bane);
             Assert.AreEqual(false, result, "Comparing different byte arrays");
         }
-
-        #endregion
-
-        #region ByteArrayToAndFro
 
         [TestMethod]
         public void ByteArrayToStringTest()
@@ -162,6 +158,11 @@ namespace ByteReaderTests
             byte[] bar = ByteReader.ByteReader.StringToByteArray(byteString);
             bool result = bar.SequenceEqual(bae);
             Assert.AreEqual(true, result);
+
+            byteString = "";
+            bar = ByteReader.ByteReader.StringToByteArray(byteString);
+            result = bar.SequenceEqual(bae);
+            Assert.AreEqual(false, result);
         }
 
         [TestMethod]

@@ -16,7 +16,7 @@ namespace ByteReader
         {
             byte[] bytes = new byte[1];
             if (File.Exists(file))
-                bytes = GetHexFromFile(file);
+                bytes = FileToByteArray(file);
             else
                 throw new FileNotFoundException("\"" + file + "\"" + " was not found");
             int maxI = amount >= 0 && amount <= bytes.Length ? amount : bytes.Length;
@@ -42,7 +42,7 @@ namespace ByteReader
                 // Check whether signBytes is a subset of fileBytes
                 // return !signBytes.Except(fileBytes).Any();
 
-                byte[] fileBytes = GetHexFromFile(file);
+                byte[] fileBytes = FileToByteArray(file);
                 byte[] signBytes = StringToByteArray(signature);
 
                 for (int i = 0; i < signBytes.Length; ++i)
@@ -61,7 +61,7 @@ namespace ByteReader
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        public static byte[] GetHexFromFile(string file)
+        public static byte[] FileToByteArray(string file)
         {
             if (File.Exists(file))
             {
@@ -73,6 +73,19 @@ namespace ByteReader
             }
             else
                 throw new FileNotFoundException("\"" + file + "\"" + " was not found");
+        }
+
+        /// <summary>
+        /// Write byte array to a file.
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="byteArray"></param>
+        public static void ByteArrayToFile(string fileName, byte[] byteArray)
+        {
+            using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+            {
+                fs.Write(byteArray, 0, byteArray.Length);
+            }
         }
 
         /// <summary>
@@ -96,21 +109,12 @@ namespace ByteReader
         {
             var shb = System.Runtime.Remoting.Metadata.W3cXsd2001.SoapHexBinary.Parse(hex);
             return shb.Value;
-
         }
 
-        /// <summary>
-        /// Write byte array to a file.
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="byteArray"></param>
-        public static void ByteArrayToFile(string fileName, byte[] byteArray)
-        {
-            using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
-            {
-                fs.Write(byteArray, 0, byteArray.Length);
-            }
-        }
+
+        ////////////////////////////////////////////////////////////
+        /// Helper functions
+        ////////////////////////////////////////////////////////////
 
         private static byte[] ReadAllBytes(BinaryReader reader)
         {

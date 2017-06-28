@@ -1,6 +1,6 @@
 # Byte reader
 
-Simple byte reader distributed as an assembly. **Test** shows an example usage.
+Simple byte reader distributed as an assembly. **ByteReaderCLI** shows an example usage.
 
 Several functions are available, namely:
 

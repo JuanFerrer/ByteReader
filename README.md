@@ -21,7 +21,7 @@ string signature = "4D 5A"  // Signature of an exe
 if (ByteReader.ByteReader.CheckFileSignature(filename, signature))
     Console.WriteLine($"Signature {signature} was found");
 
-// Output: Signature "4D 5A" was found
+// Output: Signature 4D 5A was found
 ```
 
 ### `public static string ByteArrayToString(byte[] ba, string separator = " ")` 

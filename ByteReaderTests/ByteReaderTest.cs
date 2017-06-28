@@ -179,10 +179,28 @@ namespace ByteReaderTests
 
         #endregion
 
+        public struct Result
+        {
+            public string Name { get; set; }
+            public int Value { get; set; }
+            public Result(string n, int v)
+            {
+                Name = n;
+                Value = v;
+            }
+        }
+
         #region Performance
         [TestMethod]
         public void CheckFileSignaturePerformanceTest()
         {
+            string[] resultsArray = File.ReadAllLines(@"..\..\PerformanceTestsResults.txt");
+            Result[] results = new Result[3];
+            for (int i = 0; i < resultsArray.Length; ++i)
+            {
+                string[] subStrings = resultsArray[i].Split(':');
+                results[i] = new Result(subStrings[0], int.Parse(subStrings[1]));
+            }
             string file = @"..\..\Test01.jpg";
             string signature = "FF D8";
             TimeSpan time = Time(() =>
@@ -190,7 +208,12 @@ namespace ByteReaderTests
                 if (ByteReader.ByteReader.CheckFileSignature(file, signature)) { }
 
             });
-            Assert.IsTrue(time.CompareTo(0) < 15);
+            Assert.IsTrue(time.Milliseconds.CompareTo(results[0].Value) < 0);
+            if (Math.Abs(time.Milliseconds - results[0].Value) > 10)    // Over 10 ms difference
+            {
+                resultsArray[0] = "CheckFileSignature:" + time.Milliseconds;
+                File.WriteAllLines(@"..\..\PerformanceTestsResults.txt", resultsArray);
+            }
         }
         #endregion
 

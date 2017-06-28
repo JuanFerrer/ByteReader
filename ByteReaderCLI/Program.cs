@@ -45,7 +45,7 @@ namespace ByteReaderCLI
             }
             else
             {
-                Console.WriteLine("Byte reader command-line 2017\nJuan Ferrer\n\n");
+                Console.WriteLine("Byte reader command-line, June 2017\nJuan Ferrer\n\n");
                 int rowOffset = 4;
                 cursorPos += rowOffset;
                 Console.SetCursorPosition(0, cursorPos);

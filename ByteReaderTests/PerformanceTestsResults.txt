@@ -1,0 +1,3 @@
+CheckFileSignature:5
+FileToByteArray:15
+StringToByteArray:15

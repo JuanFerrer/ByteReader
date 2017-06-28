@@ -24,13 +24,6 @@ if (ByteReader.ByteReader.CheckFileSignature(filename, signature))
 // Output: Signature "4D 5A" was found
 ```
 
-### `public static byte[] GetHexFromFile(string file)` 
-Return an array containing the bytes of the file.
-``` cs
-string filename = "C:\Windows\System32\notepad.exe"
-byte[] ba = ByteReader.ByteReader.GetHexFromFile(filename);
-```
-
 ### `public static string ByteArrayToString(byte[] ba, string separator = " ")` 
 Parse a `byte[]` to a string separating the elements with the specified string.
 ``` cs
@@ -57,4 +50,11 @@ ByteReader.ByteReader.ByteArrayToFile(filename, ByteReader.ByteReader.StringToBy
 ByteReader.ByteReader.PrintBytes(filename);
 
 // Output: 4D 5A 90 00 03 00 00 00 04 00
+```
+
+### `public static byte[] FileToByteArray(string file)` 
+Return an array containing the bytes of the file.
+``` cs
+string filename = "C:\Windows\System32\notepad.exe"
+byte[] ba = ByteReader.ByteReader.GetHexFromFile(filename);
 ```

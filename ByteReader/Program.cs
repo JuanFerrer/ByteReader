@@ -10,8 +10,8 @@ namespace ByteReader
         /// <summary>
         /// Print bytes until either amount or end of file is reached. -1 goes until the end of the file
         /// </summary>
-        /// <param name="file"></param>
-        /// <param name="amount"></param>
+        /// <param name="file">Full file path</param>
+        /// <param name="amount">Number of bytes to be read</param>
         public static void PrintBytes(string file, int amount = -1)
         {
             byte[] bytes = new byte[1];
@@ -27,8 +27,8 @@ namespace ByteReader
         /// <summary>
         /// Find whether signature appears at the beginning of the file
         /// </summary>
-        /// <param name="file"></param>
-        /// <param name="signature"></param>
+        /// <param name="file">Full file path</param>
+        /// <param name="signature">Bytes that are expected to appear at the start of the file</param>
         /// <returns></returns>
         public static bool CheckFileSignature(string file, string signature)
         {
@@ -36,11 +36,6 @@ namespace ByteReader
             {
                 if (signature == "")
                     return false;
-
-                // List<byte> signBytes = new List<byte>(System.Text.Encoding.ASCII.GetBytes(signature));
-                // List<byte> fileBytes = new List<byte>(GetHexFromFile(file));
-                // Check whether signBytes is a subset of fileBytes
-                // return !signBytes.Except(fileBytes).Any();
 
                 byte[] fileBytes = FileToByteArray(file);
                 byte[] signBytes = StringToByteArray(signature);
@@ -59,7 +54,7 @@ namespace ByteReader
         /// <summary>
         /// Get byte array from file
         /// </summary>
-        /// <param name="file"></param>
+        /// <param name="file">Full file path</param>
         /// <returns></returns>
         public static byte[] FileToByteArray(string file)
         {
@@ -78,21 +73,21 @@ namespace ByteReader
         /// <summary>
         /// Write byte array to a file.
         /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="byteArray"></param>
-        public static void ByteArrayToFile(string fileName, byte[] byteArray)
+        /// <param name="file">Full file path</param>
+        /// <param name="ba">Array of bytes to be written to file</param>
+        public static void ByteArrayToFile(string file, byte[] ba)
         {
-            using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+            using (var fs = new FileStream(file, FileMode.Create, FileAccess.Write))
             {
-                fs.Write(byteArray, 0, byteArray.Length);
+                fs.Write(ba, 0, ba.Length);
             }
         }
 
         /// <summary>
         /// Parse byte array into a string
         /// </summary>
-        /// <param name="ba"></param>
-        /// <param name="separator"></param>
+        /// <param name="ba">Byte array to be converted</param>
+        /// <param name="separator">Character to separate bytes on string representation</param>
         /// <returns></returns>
         public static string ByteArrayToString(byte[] ba, string separator = " ")
         {
@@ -103,7 +98,7 @@ namespace ByteReader
         /// <summary>
         /// Parse a string into a byte array
         /// </summary>
-        /// <param name="hex"></param>
+        /// <param name="hex">String for of bytes in hex format</param>
         /// <returns></returns>
         public static byte[] StringToByteArray(string hex)
         {

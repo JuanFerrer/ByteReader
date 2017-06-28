@@ -2,7 +2,7 @@
 using System.IO;
 
 
-namespace Test
+namespace ByteReaderCLI
 {
     class Program
     {
@@ -42,7 +42,6 @@ namespace Test
                     }
                 }
 
-                Console.ReadKey();
             }
             else
             {
@@ -57,7 +56,6 @@ namespace Test
                     Console.Write(helpText[i]);
                     Console.SetCursorPosition(0, i + cursorPos + 1);
                 }
-                Console.ReadKey();
             }
         }
 

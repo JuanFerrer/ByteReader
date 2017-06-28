@@ -2,6 +2,7 @@
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using System.Diagnostics;
 
 namespace ByteReaderTests
 {
@@ -177,5 +178,28 @@ namespace ByteReaderTests
         }
 
         #endregion
+
+        #region Performance
+        [TestMethod]
+        public void CheckFileSignaturePerformanceTest()
+        {
+            string file = @"..\..\Test01.jpg";
+            string signature = "FF D8";
+            TimeSpan time = Time(() =>
+            {
+                if (ByteReader.ByteReader.CheckFileSignature(file, signature)) { }
+
+            });
+            Assert.IsTrue(time.CompareTo(0) < 15);
+        }
+        #endregion
+
+        public static TimeSpan Time(Action action)
+        {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            action();
+            stopwatch.Stop();
+            return stopwatch.Elapsed;
+        }
     }
 }

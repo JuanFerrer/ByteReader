@@ -7,7 +7,7 @@ Several functions are available, namely:
 ### `public static void PrintBytes(string file, int amount = -1)` 
 Prints bytes in HEX up to *amount* (if within zero and *file length*) or *file length*, whichever comes first.
 ``` cs
-string filename = "C:\Windows\System32\notepad.exe"
+string filename = @"C:\Windows\System32\notepad.exe"
 ByteReader.ByteReader.PrintBytes(filename, 10);
 
 // Output: 4D 5A 90 00 03 00 00 00 04 00
@@ -16,7 +16,7 @@ ByteReader.ByteReader.PrintBytes(filename, 10);
 ### `public static bool CheckFileSignature(string file, string signature)` 
 Return true if the signature provided appears exactly at the beginning of the file; false otherwise.
 ``` cs
-string filename = "C:\Windows\System32\notepad.exe"
+string filename = @"C:\Windows\System32\notepad.exe"
 string signature = "4D 5A"  // Signature of an exe
 if (ByteReader.ByteReader.CheckFileSignature(filename, signature))
     Console.WriteLine($"Signature {signature} was found");
@@ -27,7 +27,7 @@ if (ByteReader.ByteReader.CheckFileSignature(filename, signature))
 ### `public static string ByteArrayToString(byte[] ba, string separator = " ")` 
 Parse a `byte[]` to a string separating the elements with the specified string.
 ``` cs
-string filename = "C:\Windows\System32\notepad.exe"
+string filename = @"C:\Windows\System32\notepad.exe"
 byte[] ba = ByteReader.ByteReader.GetHexFromFile(filename);
 Console.WriteLine(ByteReader.ByteReader.ByteArrayToString(ba, "-"));
 
@@ -55,6 +55,6 @@ ByteReader.ByteReader.PrintBytes(filename);
 ### `public static byte[] FileToByteArray(string file)` 
 Return an array containing the bytes of the file.
 ``` cs
-string filename = "C:\Windows\System32\notepad.exe"
+string filename = @"C:\Windows\System32\notepad.exe"
 byte[] ba = ByteReader.ByteReader.GetHexFromFile(filename);
 ```

@@ -173,7 +173,7 @@ namespace ByteReaderTests
             string filename = @"..\..\Test04.txt";
             byte[] ba = System.Text.Encoding.ASCII.GetBytes(str);
             ByteReader.ByteReader.ByteArrayToFile(filename, ba);
-            string result = File.ReadLines(filename).First();
+            string result = File.ReadAllLines(filename)[0];
             Assert.AreEqual(str, result);
         }
 

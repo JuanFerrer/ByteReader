@@ -34,5 +34,5 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 // https://codingforsmarties.wordpress.com/2016/01/21/how-to-version-assemblies-destined-for-nuget/
 [assembly: AssemblyVersion("1.0.0.0")]              // Stays the same until next major release
-[assembly: AssemblyFileVersion("1.0.1.0")]          // Should be updated for each release
-[assembly: AssemblyInformationalVersion("1.0.1")]   // Should be updated for each release
+[assembly: AssemblyFileVersion("1.0.2.0")]          // Should be updated for each release
+[assembly: AssemblyInformationalVersion("1.0.2")]   // Should be updated for each release

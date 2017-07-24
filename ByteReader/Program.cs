@@ -39,6 +39,10 @@ namespace ByteReader
                 byte[] fileBytes = FileToByteArray(file);
                 byte[] signBytes = StringToByteArray(signature);
 
+                // If the file is empty, the signature is not there
+                if (fileBytes.Length < signBytes.Length)
+                    return false;
+
                 for (int i = 0; i < signBytes.Length; ++i)
                 {
                     if (signBytes[i] != fileBytes[i])

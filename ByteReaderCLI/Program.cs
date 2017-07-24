@@ -18,12 +18,17 @@ namespace ByteReaderCLI
                     switch (funct)
                     {
                         case "-s":
-                            if (ByteReader.ByteReader.CheckFileSignature(file, args[2]))
+                            if (args.Length == 3)
                             {
-                                Console.WriteLine("Signature " + args[2] + " was found.");
+                                if (ByteReader.ByteReader.CheckFileSignature(file, args[2]))
+                                {
+                                    Console.WriteLine("Signature " + args[2] + " was found.");
+                                }
+                                else
+                                    Console.Write("Signature not found");
                             }
                             else
-                                Console.WriteLine("Signature " + args[2] + " not found.");
+                                Console.WriteLine("No signature provided");
                             break;
                         case "-p":
                             int amount = -1;
